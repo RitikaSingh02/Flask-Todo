@@ -1,1 +1,1 @@
-sqlite:////tmp/test.db
+sqlite:///test.db
