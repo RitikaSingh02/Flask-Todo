@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 app = Flask(__name__)
-f = open("info.txt", "r")
+f = open("db.txt", "r")
 # mysql://username:password@host/dbname
 app.config['SQLALCHEMY_DATABASE_URI'] = f.read()
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
