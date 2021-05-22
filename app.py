@@ -16,7 +16,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 # print(db)
 migrate = Migrate(app, db)
-
+app.config['SECRET_KEY'] = "1234"
+app.config['SESSION_TYPE'] = 'filesystem'
+app.config['PERMANENT_SESSION_LIFETIME'] = 1800
 # define the schema
 
 
