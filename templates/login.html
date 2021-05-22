@@ -17,10 +17,6 @@
 
     
     <title>ToDo</title>
-        
-    <style>
-
-      </style>
   </head>
   <body>
 
@@ -28,12 +24,12 @@
       <div class="main-header">
         <h1>Login</h1>
         <form action = "/login" method="POST">
-          <input type="text" class="form-control my-3" placeholder="Username" name="username" aria-label="Username" aria-describedby="basic-addon1" required>
-          <input type="password" class="form-control my-3" placeholder="Password" name = "password"aria-label="Password" aria-describedby="basic-addon1" required>
+          <input type="text" class="form-control my-3" placeholder="Username" name="username" aria-label="Username"  required/>
+          <input type="password" class="form-control my-3" placeholder="Password" name = "password"aria-label="Password"  required/>
           {%if msg%}
             <div class="alert">
               <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-              Invalid Credentials
+              {{msg}}
             </div>
           {%endif%}
             <input type="submit" class="btn btn-secondary my-2" onclick="location.href = '/login';"/>
