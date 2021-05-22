@@ -123,7 +123,4 @@ def search():
 
 
 if __name__ == "__main__":
-    app.secret_key = "secret%123"
-    app.config['SESSION_TYPE'] = 'filesystem'
-    app.config['PERMANENT_SESSION_LIFETIME'] = 1800
     app.run(debug=True, port=8080)
