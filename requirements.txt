@@ -76,3 +76,4 @@ whitenoise==5.2.0
 wsproto==1.0.0
 WTForms==2.3.3
 zope.interface==5.4.0
+flask-migrate

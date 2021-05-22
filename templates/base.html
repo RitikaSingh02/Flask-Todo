@@ -36,7 +36,11 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Home</a>
+                {% if user%}
+                <a class="nav-link deactive" aria-current="page" href="/">Welcome {{user}}</a>
+                {%else%}
+                <a class="nav-link active" aria-current="page" href="/login">Login</a>
+                {%endif%}
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Organise your day</a>
@@ -44,8 +48,12 @@
             </ul>
             <div class="d-flex" >
               <input class="form-control me-2" type="search" id = "search" name= "search" placeholder="Search your Todo" aria-label="Search">
-              <button class="btn btn-outline-success" onclick= "search(event)" type="submit">Search</button>
+              <button class="btn btn-outline-success me-2" onclick= "search(event)" type="submit">Search</button>
             </div>
+            <div class="d-flex" >
+              <button type="button" class="btn btn-outline-light" onclick="location.href ='/logout';">Logout</button>
+            </div>
+
           </div>
         </div>
       </nav>

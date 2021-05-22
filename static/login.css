@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap");
+:root {
+  --main-font: "Nunito Sans", sans-serif;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  background-image: url("../static/login.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.main-header {
+  margin-top: 20%;
+  height: 70%;
+  width: 50%;
+  top: 45%;
+  left: 70%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-header h1 {
+  color: #6495ed;
+}
+/* The alert message box */
+.alert {
+  padding: 20px;
+  background-color: #f44336; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
