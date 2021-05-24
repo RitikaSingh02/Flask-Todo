@@ -28,6 +28,12 @@ def not_found(e):
     return render_template("404.html")
 
 
+@app.errorhandler(405)
+def not_found(e):
+    # defining function
+    return render_template("405.html")
+
+
 class User(db.Model):
     _tablename = 'user'
     id = db.Column(db.Integer, primary_key=True)
