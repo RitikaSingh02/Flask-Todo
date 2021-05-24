@@ -53,9 +53,11 @@
 
               <tr>
                 <th scope="row">{{loop.index}}</th>
-                <td>{{todo.title}}</td>
-                <td>{{todo.desc}}</td>
-                <td>{{todo.date_created}}</td>
+                <div id = "search-input">
+                  <td >{{todo.title}}</td>
+                  <td>{{todo.desc}}</td>
+                  <td>{{todo.date_created}}</td>
+                </div>
                 <td><a href = "update/{{todo.sno}}"><button type="button" class="btn btn-outline-dark  btn-sm" >Update</button></a>
                 <a href = "delete/{{todo.sno}}"><button type="button" class="btn btn-outline-dark mx-2  btn-sm" >Done!</button></a></td>
 

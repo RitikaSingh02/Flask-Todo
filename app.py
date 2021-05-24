@@ -1,22 +1,22 @@
-import os
 from flask import Flask, render_template, request, redirect, session
 from flask.helpers import url_for
-from flask.wrappers import Request
-from werkzeug.utils import redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from datetime import datetime
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 app = Flask(__name__)
-f = open("db.txt", "r")
 # mysql://username:password@host/dbname
-app.config['SQLALCHEMY_DATABASE_URI'] = f.read()
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 # print(db)
+
 migrate = Migrate(app, db)
-app.config['SECRET_KEY'] = "1234"
+app.config['SECRET_KEY'] = os.getenv('DATABASE_URI')
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['PERMANENT_SESSION_LIFETIME'] = 1800
 # define the schema
@@ -56,7 +56,8 @@ def login():
                 db.session.commit()
                 session['user'] = uname
                 return redirect(url_for('home'))
-            elif User.query.filter_by(uname=uname, password=password).first() is None:
+            elif User.query.filter_by(uname=uname,
+                                      password=password).first() is None:
                 return render_template('login.html', msg="Invalid Credentials")
             else:
                 session['user'] = uname
@@ -91,7 +92,7 @@ def logout():
 
 @app.route('/delete/<int:sno>')
 def delete(sno):
-    todo = Todo.query.filter_by(sno=sno).first()
+    todo = Todo.query.filter_by(sno=sno, user=session['user']).first()
     db.session.delete(todo)
     db.session.commit()
     return redirect("/")
@@ -108,13 +109,13 @@ def update(sno):
         db.session.add(todo)
         db.session.commit()
         return redirect("/")
-    todo = Todo.query.filter_by(sno=sno).first()
+    todo = Todo.query.filter_by(sno=sno, user=session['user']).first()
     return render_template("update.html", todo=todo, user=session['user'])
 
 
 @app.route('/search')
 def search():
-    allqueries = Todo.query.all()
+    allqueries = Todo.query.filter_by(user=session['user'])
     ans = []
     for task in allqueries:
         ans.append([task.sno, task.title, task.desc])

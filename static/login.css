@@ -27,6 +27,8 @@ body {
 
 .main-header h1 {
   color: #6495ed;
+  size: 5px;
+  margin-left: 40px;
 }
 /* The alert message box */
 .alert {
@@ -51,4 +53,11 @@ body {
 /* When moving the mouse over the close button */
 .closebtn:hover {
   color: black;
+}
+
+
+#msg , #password-check
+{
+  color:#DC143C;
+  size: 0.5px;
 }

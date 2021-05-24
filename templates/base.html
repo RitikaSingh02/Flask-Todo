@@ -26,7 +26,7 @@
         {% endblock title %}
     </title>
   </head>
-  <body>
+  <body onload="Focus()">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="/">TO-DO</a>
@@ -48,7 +48,7 @@
             </ul>
             <div class="d-flex" >
               <input class="form-control me-2" type="search" id = "search" name= "search" placeholder="Search your Todo" aria-label="Search">
-              <button class="btn btn-outline-success me-2" onclick= "search(event)" type="submit">Search</button>
+              <button class="btn btn-outline-success me-2" id = "search-button" onclick= "search(event)" type="submit">Search</button>
             </div>
             <div class="d-flex" >
               <button type="button" class="btn btn-outline-light" onclick="location.href ='/logout';">Logout</button>
