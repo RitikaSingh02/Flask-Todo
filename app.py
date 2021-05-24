@@ -22,6 +22,12 @@ app.config['PERMANENT_SESSION_LIFETIME'] = 1800
 # define the schema
 
 
+@app.errorhandler(404)
+def not_found(e):
+    # defining function
+    return render_template("404.html")
+
+
 class User(db.Model):
     _tablename = 'user'
     id = db.Column(db.Integer, primary_key=True)
@@ -93,6 +99,8 @@ def logout():
 @app.route('/delete/<int:sno>')
 def delete(sno):
     todo = Todo.query.filter_by(sno=sno, user=session['user']).first()
+    if todo is None:
+        return render_template("404.html")
     db.session.delete(todo)
     db.session.commit()
     return redirect("/")
@@ -100,27 +108,34 @@ def delete(sno):
 
 @app.route('/update/<int:sno>', methods=['GET', 'POST'])
 def update(sno):
-    if request.method == "POST":
-        title = request.form["title"]
-        desc = request.form["desc"]
-        todo = Todo.query.filter_by(sno=sno).first()
-        todo.title = title
-        todo.desc = desc
-        db.session.add(todo)
-        db.session.commit()
-        return redirect("/")
-    todo = Todo.query.filter_by(sno=sno, user=session['user']).first()
-    return render_template("update.html", todo=todo, user=session['user'])
+    if 'user' in session:
+        todo = Todo.query.filter_by(sno=sno, user=session['user']).first()
+        if todo is None:
+            return render_template("404.html")
+        if request.method == "POST":
+            title = request.form["title"]
+            desc = request.form["desc"]
+            todo.title = title
+            todo.desc = desc
+            db.session.add(todo)
+            db.session.commit()
+            return redirect("/")
+        return render_template("update.html", todo=todo, user=session['user'])
+    else:
+        return render_template("login_alert.html")
 
 
 @app.route('/search')
 def search():
-    allqueries = Todo.query.filter_by(user=session['user'])
-    ans = []
-    for task in allqueries:
-        ans.append([task.sno, task.title, task.desc])
+    if 'user' in session:
+        allqueries = Todo.query.filter_by(user=session['user'])
+        ans = []
+        for task in allqueries:
+            ans.append([task.sno, task.title, task.desc])
 
-    return {"res": ans}
+        return {"res": ans}
+    else:
+        return render_template('login_alert.html')
 
 
 if __name__ == "__main__":
